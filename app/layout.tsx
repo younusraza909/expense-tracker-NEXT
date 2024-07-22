@@ -3,9 +3,12 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Header from "@/components/Header";
 
-const roboto = Roboto({ weight: '400', subsets: ["latin"] });
+const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Expense Tracket App | NEXT",
@@ -22,9 +25,8 @@ export default function RootLayout({
       <html lang="en">
         <body className={roboto.className}>
           <Header />
-          <main className="container">
-            {children}
-          </main>
+          <main className="container">{children}</main>
+          <ToastContainer />
         </body>
       </html>
     </ClerkProvider>
