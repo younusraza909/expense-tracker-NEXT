@@ -15,6 +15,7 @@ interface TransactionResult {
 }
 
 async function addTransaction(formData: FormData): Promise<TransactionResult> {
+  console.log("Hello Server");
   const textValue = formData.get("text");
   const amountValue = formData.get("amount");
 
@@ -49,3 +50,5 @@ async function addTransaction(formData: FormData): Promise<TransactionResult> {
     return { error: "Transaction not added" };
   }
 }
+
+export default addTransaction;
