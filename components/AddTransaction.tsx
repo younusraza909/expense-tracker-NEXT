@@ -1,9 +1,12 @@
 "use client";
 
+import { useRef } from "react";
 import addTransaction from "@/app/actions/addTransaction";
 import { toast } from "react-toastify";
 
 const AddTransaction = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+
   const clientAction = async (formData: FormData) => {
     const { data, error } = await addTransaction(formData);
 
@@ -11,6 +14,7 @@ const AddTransaction = () => {
       toast.error(error);
     } else {
       toast.success("Transaction added");
+      formRef.current?.reset();
     }
   };
 
@@ -19,7 +23,7 @@ const AddTransaction = () => {
       <h3>Add Transaction</h3>
       {/* We are using client action here so it is basically a component that will be called by form */}
       {/* In new version of Next we can now use action on client and server both , in order to validate form we first hit the client action */}
-      <form action={clientAction}>
+      <form action={clientAction} ref={formRef}>
         <div className="form-control">
           <label htmlFor="text">Text</label>
           <input
